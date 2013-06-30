@@ -20,7 +20,11 @@ this.Deferred = (function() {
 
         function execute(funcs, args, ctx) {
             for (var i = 0, e; e = funcs[i++];) {
-                e.apply(ctx || _this, args);
+                if (Array.isArray(e)) {
+                    execute(e, args, ctx);
+                } else {
+                    e.apply(ctx || _this, args);
+                }
             }
         }
 
@@ -43,7 +47,7 @@ this.Deferred = (function() {
 
         function wrap(instant, cblist) {
             return function(arglist) {
-                var args = Array.isArray(arglist) ? arglist : slice(arguments);
+                var args = slice(arguments);
                 if (state === instant) {
                     execute(args, closedArgs);
                 } else if (state === PENDING) {
