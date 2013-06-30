@@ -1,6 +1,6 @@
 (function() {
     
-var slice = function(arr) {Array.prototype.slice.call(arr, 0)};
+var slice = function(arr) {return Array.prototype.slice.call(arr, 0)};
 
 this.Deferred = (function() {
 
