@@ -38,9 +38,9 @@ Notice that the AMD module doesn't have a `Deferred` method, and instead returns
 
 <table>
 <tr><th>Library<th>Unminified<th>Minified (uglify)<th>Minified (CC)
-<tr><td>[jQuery](https://github.com/jquery/jquery/blob/master/src/deferred.js)<td>4.3kb<td>1.5kb (672b gzipped)<td>[1]
-<tr><td>[simply-deferred](https://github.com/sudhirj/simply-deferred/blob/master/deferred.js)<td>6.5kb<td>2.7kb (994b gzipped)<td>2.4kb (938b gzipped)
-<tr><td>[defer.js](https://github.com/mattbasta/defer.js/blob/master/defer.js)<td>3.9kb<td>1.6kb (683b gzipped)<td>1.4kb (630b gzipped)
+<tr><td><a href="https://github.com/jquery/jquery/blob/master/src/deferred.js">jQuery</a><td>4.3kb<td>1.5kb (672b gzipped)<td>[1]
+<tr><td><a href="https://github.com/sudhirj/simply-deferred/blob/master/deferred.js">simply-deferred</a><td>6.5kb<td>2.7kb (994b gzipped)<td>2.4kb (938b gzipped)
+<tr><td><a href="https://github.com/mattbasta/defer.js/blob/master/defer.js">defer.js</a><td>3.9kb<td>1.6kb (683b gzipped)<td>1.4kb (630b gzipped)
 </table>
 
 Note that most gzipped sizes would be even lower if the libraries were combined with other JS in a bundle because entities could be shared.
