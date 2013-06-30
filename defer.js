@@ -42,11 +42,11 @@ this.Deferred = (function() {
         this.rejectWith = closer(failCBs, REJECTED, true);
 
         function wrap(instant, cblist) {
-            return function() {
+            return function(arglist) {
+                var args = Array.isArray(arglist) ? arglist : slice(arguments);
                 if (state === instant) {
-                    execute(arguments, closedArgs);
+                    execute(args, closedArgs);
                 } else if (state === PENDING) {
-                    var args = slice(arguments);
                     for (var i = 0, e; e = args[i++];) {
                         cblist.push(e);
                     }
