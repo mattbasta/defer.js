@@ -44,7 +44,6 @@ this.Deferred = (function() {
         this.reject = closer(failCBs, REJECTED);
         this.rejectWith = closer(failCBs, REJECTED, true);
 
-
         this.promise = function(obj) {
             obj = obj || {};
             function wrap(instant, cblist) {
@@ -66,7 +65,8 @@ this.Deferred = (function() {
             obj.then = function(doneFilter, failFilter) {
                 var def = new defer();
                 obj.done(function() {
-                    def.resolveWith.apply(this, [this].concat(doneFilter ? doneFilter.apply(this, arguments) : arguments));
+                    var args = slice(arguments);
+                    def.resolveWith.apply(this, [this].concat(doneFilter ? doneFilter.apply(this, args) : args));
                 });
                 obj.fail(function() {
                     var args = slice(arguments);

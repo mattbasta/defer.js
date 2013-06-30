@@ -191,9 +191,8 @@ included to test for parity. All rights to the below code belong to:
       it('should pass through for null filters for done', function(done) {
         var def, filtered, finisher;
         finisher = function(value) {
-          if (value === 5) {
-            return done();
-          }
+          assert.equal(value, 5);
+          return done();
         };
         def = new deferred.Deferred();
         filtered = def.then(null, null);
@@ -293,7 +292,6 @@ included to test for parity. All rights to the below code belong to:
           d3 = new deferred.Deferred();
           after_all = deferred.when(d1, d2, d3);
           after_all.done(function(arg1, arg2, arg3) {
-            console.log(arguments);
             assert.deepEqual(arg1, [42]);
             assert.deepEqual(arg2, []);
             assert.deepEqual(arg3, ['abc', 123]);
