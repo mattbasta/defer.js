@@ -100,7 +100,7 @@ this.Deferred.when = this.when = function() {
     var count = 0;
     for (var i = 0, e; e = args[i];) {
         if (!e.promise) {
-            out[i] = e;
+            out[i++] = e;
             continue;
         }
         count++;
