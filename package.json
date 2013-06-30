@@ -1,0 +1,20 @@
+{
+  "author": "Matt Basta",
+  "name": "defer.js",
+  "description": "A tiny jQuery-compatible Deferred library",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mattbasta/defer.js.git"
+  },
+  "main": "./deferred",
+  "dependencies": [],
+  "devDependencies": ["mocha", "underscore"],
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test.js -Gw"
+  }
+}
