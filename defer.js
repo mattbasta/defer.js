@@ -114,9 +114,9 @@ this.Deferred.when = this.when = function() {
     return def.promise();
 };
 
-if (define !== undefined && define.amd) {
+if (this.define !== undefined && define.amd) {
     define('defer', [], this.Deferred);
-} else if (exports !== undefined) {
+} else if (this.exports !== undefined) {
     exports.Deferred = this.Deferred;
     exports.when = this.Deferred.when;
 }
