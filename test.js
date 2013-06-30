@@ -18,7 +18,7 @@ included to test for parity. All rights to the below code belong to:
 
   _ = require('underscore');
 
-  expectedMethods = ['done', 'fail', 'always', 'state', 'then', 'pipe'];
+  expectedMethods = ['done', 'fail', 'always', 'state', 'then'];
 
   assertHasPromiseApi = function(promise) {
     var method, _i, _len, _results;
@@ -36,13 +36,11 @@ included to test for parity. All rights to the below code belong to:
 
   describe('deferred', function() {
     it('should create and return a deferred object', function() {
-      var def;
-      def = new deferred.Deferred();
+      var def = new deferred.Deferred();
       return assert.equal(def.state(), "pending");
     });
     it('should maintain a resolved state', function() {
-      var def;
-      def = new deferred.Deferred();
+      var def = new deferred.Deferred();
       assert.equal(def.state(), "pending");
       def.resolve();
       assert.equal(def.state(), "resolved");
@@ -52,8 +50,7 @@ included to test for parity. All rights to the below code belong to:
       return assert.equal(def.state(), "resolved");
     });
     it('should maintain a rejected state', function() {
-      var def;
-      def = new deferred.Deferred();
+      var def = new deferred.Deferred();
       assert.equal(def.state(), "pending");
       def.reject();
       assert.equal(def.state(), "rejected");
@@ -131,8 +128,7 @@ included to test for parity. All rights to the below code belong to:
       return def.fail(callback);
     });
     it('should call the always callbacks on rejection', function(done) {
-      var def;
-      def = new deferred.Deferred();
+      var def = new deferred.Deferred();
       def.always(done);
       def.reject();
       return def.done(done);

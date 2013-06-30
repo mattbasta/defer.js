@@ -11,7 +11,6 @@ this.Deferred = (function() {
     function defer(beforeStart) {
         var _this = this;
         var state = PENDING;
-        this.state = function() {return state;};
 
         var doneCBs = [];
         var failCBs = [];
@@ -60,6 +59,7 @@ this.Deferred = (function() {
 
         this.promise = function(obj) {
             obj = obj || {};
+            obj.state = function() {return state;};
             obj.done = wrap(RESOLVED, doneCBs);
             obj.fail = wrap(REJECTED, failCBs);
             obj.then = function(doneFilter, failFilter) {
