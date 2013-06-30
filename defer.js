@@ -35,8 +35,7 @@ this.Deferred = (function() {
                 }
                 state = new_state;
                 var args = slice(arguments);
-                closedArgs = ctx ? args.slice(1) : args;
-                execute(list, args, ctx ? args[0] : _this);
+                execute(list, closedArgs = ctx ? args.slice(1) : args, ctx ? args[0] : _this);
             };
         }
 
