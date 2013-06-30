@@ -43,29 +43,29 @@ this.Deferred = (function() {
         this.reject = closer(failCBs, REJECTED);
         this.rejectWith = closer(failCBs, REJECTED, true);
 
-        function wrap(instant, cblist) {
-            return function(arglist) {
-                var args = slice(arguments);
-                if (state === instant) {
-                    execute(args, closedArgs);
-                } else if (state === PENDING) {
-                    for (var i = 0, e; e = args[i++];) {
-                        cblist.push(e);
-                    }
-                }
-                return _this;
-            };
-        }
 
         this.promise = function(obj) {
             obj = obj || {};
+            function wrap(instant, cblist) {
+                return function(arglist) {
+                    var args = slice(arguments);
+                    if (state === instant) {
+                        execute(args, closedArgs);
+                    } else if (state === PENDING) {
+                        for (var i = 0, e; e = args[i++];) {
+                            cblist.push(e);
+                        }
+                    }
+                    return obj;
+                };
+            }
             obj.state = function() {return state;};
             obj.done = wrap(RESOLVED, doneCBs);
             obj.fail = wrap(REJECTED, failCBs);
             obj.then = function(doneFilter, failFilter) {
                 var def = new defer();
                 obj.done(function() {
-                    def.resolveWith.apply(this, [this].concat(doneFilter.apply(this, arguments)));
+                    def.resolveWith.apply(this, [this].concat(doneFilter ? doneFilter.apply(this, arguments) : arguments));
                 });
                 obj.fail(function() {
                     var args = slice(arguments);
@@ -75,6 +75,7 @@ this.Deferred = (function() {
             };
             obj.always = function() {
                 _this.done.apply(_this, arguments).fail.apply(_this, arguments);
+                return obj;
             };
             return obj;
         };
@@ -97,7 +98,7 @@ this.Deferred.when = this.when = function() {
     var out = [];
     var def = this.Deferred();
     var count = 0;
-    for (var i = 0, e; e = args[i++];) {
+    for (var i = 0, e; e = args[i];) {
         if (!e.promise) {
             out[i] = e;
             continue;
@@ -111,7 +112,7 @@ this.Deferred.when = this.when = function() {
                     def.resolve.apply(def, out);
                 }
             });
-        })(i);
+        })(i++);
     }
     if (!count) {def.resolve.apply(def, out);}
     return def.promise();
