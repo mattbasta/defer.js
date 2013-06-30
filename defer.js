@@ -1,6 +1,6 @@
 (function() {
     
-var slice = Array.prototype.slice.call;
+var slice = function(arr) {Array.prototype.slice.call(arr, 0)};
 
 this.Deferred = (function() {
 
@@ -30,7 +30,7 @@ this.Deferred = (function() {
                     return;
                 }
                 state = new_state;
-                var args = slice(arguments, 0);
+                var args = slice(arguments);
                 closedArgs = ctx ? args.slice(1) : args;
                 execute(list, args, ctx ? args[0] : _this);
             };
@@ -46,7 +46,7 @@ this.Deferred = (function() {
                 if (state === instant) {
                     execute(arguments, closedArgs);
                 } else if (state === PENDING) {
-                    var args = slice(arguments, 0);
+                    var args = slice(arguments);
                     for (var i = 0, e; e = args[i++];) {
                         cblist.push(e);
                     }
@@ -65,7 +65,7 @@ this.Deferred = (function() {
                     def.resolveWith.apply(this, [this].concat(doneFilter.apply(this, arguments)));
                 });
                 obj.fail(function() {
-                    var args = slice(arguments, 0);
+                    var args = slice(arguments);
                     def.rejectWith.apply(this, [this].concat(failFilter ? failFilter.apply(this, args) : args));
                 });
                 return def.promise();
@@ -87,7 +87,7 @@ this.Deferred = (function() {
 })();
 
 this.Deferred.when = this.when = function() {
-    var args = slice(arguments, 0);
+    var args = slice(arguments);
     if (args.length === 1 && args[0].promise) {
         return args[0].promise();
     }
@@ -103,7 +103,7 @@ this.Deferred.when = this.when = function() {
         (function(i) {
             e.fail(def.reject).done(function() {
                 count--;
-                out[i] = slice(arguments, 0);
+                out[i] = slice(arguments);
                 if (!count) {
                     def.resolve.apply(def, out);
                 }

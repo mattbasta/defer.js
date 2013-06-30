@@ -15,6 +15,6 @@
     "node": "*"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test.js -Gw"
+    "test": "./node_modules/mocha/bin/mocha test.js"
   }
 }
