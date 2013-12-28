@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git://github.com/mattbasta/defer.js.git"
   },
-  "main": "./deferred",
+  "main": "./defer",
   "dependencies": [],
   "devDependencies": ["mocha", "underscore"],
   "optionalDependencies": {},
