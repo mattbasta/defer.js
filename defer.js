@@ -42,7 +42,7 @@ function defer(beforeStart) {
     this.reject = closer(failCBs, REJECTED);
     this.rejectWith = closer(failCBs, REJECTED, true);
 
-    this.promise = function(obj) {
+    var promise = this.promise = function(obj) {
         obj = obj || {};
         function wrap(instant, cblist) {
             return function(arglist) {
@@ -57,6 +57,7 @@ function defer(beforeStart) {
                 return obj;
             };
         }
+        obj.promise = promise;
         obj.state = function() {return state;};
         obj.done = wrap(RESOLVED, doneCBs);
         obj.fail = wrap(REJECTED, failCBs);
