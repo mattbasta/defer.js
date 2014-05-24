@@ -88,7 +88,7 @@ this.Deferred = (function() {
         }
     }
 
-    return function(func) {return new defer(func)};
+    return function(func) {return new defer(func);};
 })();
 
 this.Deferred.when = this.when = function() {
